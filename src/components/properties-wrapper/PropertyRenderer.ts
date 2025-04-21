@@ -1,6 +1,7 @@
 import { Component, xml } from '@odoo/owl';
 import { classNames } from '@/utils/classNames';
-interface PropertyRendererProps {
+
+export interface PropertyRendererProps {
   property: {
     label: string;
     key: string;
@@ -16,49 +17,60 @@ interface PropertyRendererProps {
   };
 }
 
+/**
+ * 基础属性验证器
+ * 定义了共用的属性验证规则
+ */
+export const BasePropertyShape = {
+  label: String,
+  key: String,
+  value: {
+    type: Function,
+    optional: true,
+  },
+  decimals: {
+    type: Number,
+    optional: true,
+  },
+  step: {
+    type: Number,
+    optional: true,
+  },
+  min: {
+    type: Number,
+    optional: true,
+  },
+  max: {
+    type: Number,
+    optional: true,
+  },
+  type: [String, Function], // 值类型，可以是字符串或Componet组件
+  required: {
+    type: Boolean,
+    optional: true,
+  },
+  readonly: {
+    type: Function,
+    optional: true,
+  },
+  onChange: {
+    type: Function,
+    optional: true,
+  },
+};
+
+/**
+ * 属性渲染器的Props验证器
+ */
+export const PropertyRendererPropsValidator = {
+  property: {
+    type: Object,
+    shape: BasePropertyShape,
+  },
+};
+
 export class PropertyRenderer extends Component<PropertyRendererProps> {
-  static props = {
-    property: {
-      type: Object,
-      shape: {
-        label: String,
-        key: String,
-        value: {
-          type: Function,
-          optional: true,
-        },
-        decimals: {
-          type: Number,
-          optional: true,
-        },
-        step: {
-          type: Number,
-          optional: true,
-        },
-        min: {
-          type: Number,
-          optional: true,
-        },
-        max: {
-          type: Number,
-          optional: true,
-        },
-        type: [String, Function], // 值类型，可以是字符串或Componet组件
-        required: {
-          type: Boolean,
-          optional: true,
-        },
-        readonly: {
-          type: Function,
-          optional: true,
-        },
-        onChange: {
-          type: Function,
-          optional: true,
-        },
-      },
-    },
-  };
+  static props = PropertyRendererPropsValidator;
 
   static template = xml`
     <div class="${classNames('&property-renderer')}" t-attf-class="props.property.type">

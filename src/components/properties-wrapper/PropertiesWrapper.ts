@@ -1,60 +1,42 @@
 import { Component, xml } from '@odoo/owl';
-import { PropertyRenderer } from './PropertyRenderer';
+import { PropertyRenderer, PropertyRendererProps, BasePropertyShape } from './PropertyRenderer';
 import { classNames } from '@/utils/classNames';
 
-interface PropertiesWrapperProps {
-  properties: Array<{
-    label: string;
-    key: string;
-    value?: () => any;
-    decimals?: number;
-    type?: String | Component;
-    hidden?: () => boolean;
-    required?: boolean;
-    readonly?: () => boolean;
-    onChange?: (value: any) => void;
-  }>;
+export type BaseProperty = PropertyRendererProps['property'] & {
+  hidden?: () => boolean;
+};
+
+export interface PropertiesWrapperProps {
+  properties: Array<BaseProperty>;
 }
 
-export class PropertiesWrapper extends Component<PropertiesWrapperProps> {
-  static props = {
-    properties: {
-      type: Array,
-      optional: true,
-      element: {
-        type: Object,
-        shape: {
-          label: String,
-          key: String,
-          value: {
-            type: Function,
-            optional: true,
-          },
-          decimals: {
-            type: Number,
-            optional: true,
-          },
-          type: [String, Function], // 值类型，可以是字符串或Componet组件
-          hidden: {
-            type: Function,
-            optional: true,
-          },
-          required: {
-            type: Boolean,
-            optional: true,
-          },
-          readonly: {
-            type: Function,
-            optional: true,
-          },
-          onChange: {
-            type: Function,
-            optional: true,
-          },
-        },
-      },
+/**
+ * 属性验证器 - 带隐藏属性
+ */
+export const PropertyWithHiddenShape = {
+  ...BasePropertyShape,
+  hidden: {
+    type: Function,
+    optional: true,
+  },
+};
+
+/**
+ * 属性包装器的Props验证器
+ */
+export const PropertiesWrapperPropsValidator = {
+  properties: {
+    type: Array,
+    optional: true,
+    element: {
+      type: Object,
+      shape: PropertyWithHiddenShape,
     },
-  };
+  },
+};
+
+export class PropertiesWrapper extends Component<PropertiesWrapperProps> {
+  static props = PropertiesWrapperPropsValidator;
 
   static defaultProps = {
     properties: [],

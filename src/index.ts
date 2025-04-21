@@ -1,101 +1,86 @@
 import { Component, xml, useState } from '@odoo/owl';
-import { Tab } from '@/components/tab/Tab';
+import { Tab, TabItemShape } from '@/components/tab/Tab';
 import { classNames } from '@/utils/classNames';
 import { Empty } from '@/components/empty/Empty';
-import { PropertiesWrapper } from '@/components/properties-wrapper/PropertiesWrapper';
+import {
+  PropertiesWrapper,
+  BaseProperty,
+  PropertyWithHiddenShape,
+} from '@/components/properties-wrapper/PropertiesWrapper';
 import './index.scss';
 
-interface TabProps {
+export interface TabProps {
   label: string;
   key: string;
   icon?: string;
   component?: Component;
   props?: Record<string, any>;
-  properties?: Array<{
-    label: string;
-    key: string;
-    value: () => any;
-    type: String | Component;
-    hidden?: () => boolean;
-    required?: boolean;
-    readonly?: () => boolean;
-    onChange?: (value: any) => void;
-  }>;
+  properties?: Array<BaseProperty>;
 }
 
-interface PropertiesPanelProps {
+export interface PropertiesPanelProps {
   defaultActive?: string;
   tabs?: Array<TabProps>;
   forceRender?: boolean;
   onChangeTab?: (tab: string) => void;
 }
 
+/**
+ * Tab属性验证器
+ */
+export const TabShape = {
+  label: String,
+  key: String,
+  icon: {
+    type: String,
+    optional: true,
+  },
+  component: {
+    type: Function,
+    optional: true,
+  },
+  props: {
+    type: Object,
+    optional: true,
+  },
+  properties: {
+    type: Array,
+    optional: true,
+    element: {
+      type: Object,
+      shape: PropertyWithHiddenShape,
+    },
+  },
+};
+
+/**
+ * 属性面板的Props验证器
+ */
+export const PropertiesPanelPropsValidator = {
+  defaultActive: {
+    type: String,
+    optional: true,
+  },
+  tabs: {
+    type: Array,
+    optional: true,
+    element: {
+      type: Object,
+      shape: TabShape,
+    },
+  },
+  forceRender: {
+    type: Boolean,
+    optional: true,
+  },
+  onChangeTab: {
+    type: Function,
+    optional: true,
+  },
+};
+
 export class PropertiesPanel extends Component<PropertiesPanelProps> {
-  static props = {
-    defaultActive: {
-      type: String,
-      optional: true,
-    },
-    tabs: {
-      type: Array,
-      optional: true,
-      element: {
-        type: Object,
-        shape: {
-          label: String,
-          key: String,
-          icon: {
-            type: String,
-            optional: true,
-          },
-          component: {
-            type: Function,
-            optional: true,
-          },
-          props: {
-            type: Object,
-            optional: true,
-          },
-          properties: {
-            type: Array,
-            optional: true,
-            element: {
-              type: Object,
-              shape: {
-                label: String,
-                key: String,
-                value: {
-                  type: Function,
-                  optional: true,
-                },
-                decimals: {
-                  type: Number,
-                  optional: true,
-                },
-                type: [String, Function], // 值类型，可以是字符串或Componet组件
-                hidden: {
-                  type: Function,
-                  optional: true,
-                },
-                required: {
-                  type: Boolean,
-                  optional: true,
-                },
-                readonly: {
-                  type: Function,
-                  optional: true,
-                },
-                onChange: {
-                  type: Function,
-                  optional: true,
-                },
-              },
-            },
-          },
-        },
-      },
-    },
-  };
+  static props = PropertiesPanelPropsValidator;
 
   static defaultProps = {
     defaultActive: '',

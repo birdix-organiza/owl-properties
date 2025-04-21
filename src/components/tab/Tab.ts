@@ -10,7 +10,46 @@ export interface TabsProps {
     icon?: string;
   }>;
   onChange?: (value: string) => void;
+  className?: string;
 }
+
+/**
+ * Tab项目验证器
+ */
+export const TabItemShape = {
+  label: String,
+  key: String,
+  icon: {
+    type: String,
+    optional: true,
+  },
+};
+
+/**
+ * Tab组件的验证器
+ */
+export const TabPropsValidator = {
+  className: {
+    type: String,
+    optional: true,
+  },
+  active: {
+    type: String,
+    optional: true,
+  },
+  tabs: {
+    type: Array,
+    optional: true,
+    element: {
+      type: Object,
+      shape: TabItemShape,
+    },
+  },
+  onChange: {
+    type: Function,
+    optional: true,
+  },
+};
 
 export class Tab extends Component<TabsProps> {
   state: {
@@ -21,35 +60,7 @@ export class Tab extends Component<TabsProps> {
 
   tabIndicatorRef = useRef('tabIndicator');
 
-  static props = {
-    className: {
-      type: String,
-      optional: true,
-    },
-    active: {
-      type: String,
-      optional: true,
-    },
-    tabs: {
-      type: Array,
-      optional: true,
-      element: {
-        type: Object,
-        shape: {
-          label: String,
-          key: String,
-          icon: {
-            type: String,
-            optional: true,
-          },
-        },
-      },
-    },
-    onChange: {
-      type: Function,
-      optional: true,
-    },
-  };
+  static props = TabPropsValidator;
 
   static template = xml`
     <div class="${classNames('&tab')}" t-att-class="props.className">

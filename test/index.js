@@ -49,6 +49,7 @@ class App extends Component {
               key: 'group2',
               type: 'number',
               decimals: 2,
+              step: 0.01,
             },
           ],
         },
