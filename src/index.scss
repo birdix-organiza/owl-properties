@@ -1,0 +1,39 @@
+.pro-properties-panel {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+
+  .pro-properties-tabs-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    .pro-properties-tab {
+      flex-shrink: 0;
+    }
+
+    .pro-properties-tab-content-container {
+      flex: 1;
+      overflow: hidden;
+
+      .pro-properties-tab-content {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+
+        &.invisible {
+          display: none;
+        }
+      }
+    }
+  }
+
+  // 空状态容器
+  .pro-properties-empty-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+}
