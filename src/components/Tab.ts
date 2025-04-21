@@ -77,7 +77,7 @@ export class Tab extends Component<TabsProps> {
           >
             <t t-if="tab.icon">
               <span class="${classNames('&tab-icon')} material-icons">
-                <t t-esc="tab.icon"/>
+                <t t-out="tab.icon"/>
               </span>
             </t>
             <span class="${classNames('&tab-label')}"><t t-esc="tab.label"/></span>

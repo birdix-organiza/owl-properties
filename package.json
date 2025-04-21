@@ -10,6 +10,10 @@
     "eslint": "eslint ./src/. ./test/.  --ext .js,.jsx,.ts,.tsx --fix"
   },
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/birdix-organiza/owl-properties"
+  },
   "files": [
     "es"
   ],
@@ -17,7 +21,7 @@
     "owl"
   ],
   "author": "birdix",
-  "license": "LGPL-3.0",
+  "license": "MIT",
   "dependencies": {
     "classnames": "^2.3.2"
   },
