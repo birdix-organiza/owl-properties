@@ -37,15 +37,24 @@ class App extends Component {
       tabs: [
         {
           label: 'Tab 1',
-          value: 'tab1',
-          component: TabContent,
-          props: {
-            label: 'Tab 1',
-          },
+          key: 'tab1',
+          properties: [
+            {
+              label: 'Group 1',
+              key: 'group1',
+              type: 'input',
+            },
+            {
+              label: 'Group 2',
+              key: 'group2',
+              type: 'number',
+              decimals: 2,
+            },
+          ],
         },
         {
           label: 'Tab 2',
-          value: 'tab2',
+          key: 'tab2',
           component: TabContent,
           props: {
             label: 'Tab 2',
@@ -53,7 +62,7 @@ class App extends Component {
         },
         {
           label: 'Tab 3',
-          value: 'tab3',
+          key: 'tab3',
           component: TabContent,
           props: {
             label: 'Tab 3',
@@ -61,7 +70,7 @@ class App extends Component {
         },
         {
           label: 'Tab 4',
-          value: 'tab4',
+          key: 'tab4',
           component: TabContent,
           props: {
             label: 'Tab 4',
@@ -69,7 +78,7 @@ class App extends Component {
         },
         {
           label: 'Tab 5',
-          value: 'tab5',
+          key: 'tab5',
           component: TabContent,
           props: {
             label: 'Tab 5',
@@ -77,7 +86,7 @@ class App extends Component {
         },
         {
           label: 'Tab 6',
-          value: 'tab6',
+          key: 'tab6',
           component: TabContent,
           props: {
             label: 'Tab 6',
@@ -85,7 +94,7 @@ class App extends Component {
         },
         {
           label: 'Tab 7',
-          value: 'tab7',
+          key: 'tab7',
           component: TabContent,
           props: {
             label: 'Tab 7',

@@ -2,39 +2,15 @@ import { Component, xml, useState, onMounted, onPatched, useRef } from '@odoo/ow
 import './Tab.scss';
 import { classNames } from '@/utils/classNames';
 
-export interface TabProps {
-  label: string;
-  value: string;
-  component?: Component;
-  props?: Record<string, any>;
-  icon?: string;
-}
-
-interface TabsProps {
+export interface TabsProps {
   active?: string;
-  tabs?: Array<TabProps>;
+  tabs?: Array<{
+    label: string;
+    key: string;
+    icon?: string;
+  }>;
   onChange?: (value: string) => void;
 }
-
-export const tabProps = {
-  type: Object,
-  shape: {
-    label: String,
-    value: String,
-    component: {
-      type: Function,
-      optional: true,
-    },
-    props: {
-      type: Object,
-      optional: true,
-    },
-    icon: {
-      type: String,
-      optional: true,
-    },
-  },
-};
 
 export class Tab extends Component<TabsProps> {
   state: {
@@ -57,7 +33,17 @@ export class Tab extends Component<TabsProps> {
     tabs: {
       type: Array,
       optional: true,
-      element: tabProps,
+      element: {
+        type: Object,
+        shape: {
+          label: String,
+          key: String,
+          icon: {
+            type: String,
+            optional: true,
+          },
+        },
+      },
     },
     onChange: {
       type: Function,
@@ -68,12 +54,12 @@ export class Tab extends Component<TabsProps> {
   static template = xml`
     <div class="${classNames('&tab')}" t-att-class="props.className">
       <div class="${classNames('&tab-container')}" t-ref="tabContainer">
-        <t t-foreach="props.tabs || []" t-as="tab" t-key="tab.value">
+        <t t-foreach="props.tabs || []" t-as="tab" t-key="tab.key">
           <div 
             class="${classNames('&tab-item')}" 
-            t-att-class="{'active': props.active === tab.value}"
-            t-on-click="() => this.onTabClick(tab.value)"
-            t-att-data-value="tab.value"
+            t-att-class="{'active': props.active === tab.key}"
+            t-on-click="() => this.onTabClick(tab.key)"
+            t-att-data-value="tab.key"
           >
             <t t-if="tab.icon">
               <span class="${classNames('&tab-icon')} material-icons">
@@ -154,9 +140,9 @@ export class Tab extends Component<TabsProps> {
     }
   }
 
-  onTabClick(value: string) {
-    if (this.props.onChange && value !== this.props.active) {
-      this.props.onChange(value);
+  onTabClick(key: string) {
+    if (this.props.onChange && key !== this.props.active) {
+      this.props.onChange(key);
     }
   }
 }
