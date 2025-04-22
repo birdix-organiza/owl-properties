@@ -1,6 +1,6 @@
 import { Component, xml, useState, onMounted, onPatched, useRef } from '@odoo/owl';
 import './Tab.scss';
-import { classNames } from '@/utils/classNames';
+import { classNames } from '../../utils/classNames';
 
 export interface TabsProps {
   active?: string;

@@ -1,6 +1,6 @@
 import { Component, xml } from '@odoo/owl';
 import './Empty.scss';
-import { classNames } from '@/utils/classNames';
+import { classNames } from '../../utils/classNames';
 
 export class Empty extends Component {
   static template = xml`

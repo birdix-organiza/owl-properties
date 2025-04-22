@@ -1,6 +1,6 @@
 import { Component, xml } from '@odoo/owl';
 import { PropertyRenderer, PropertyRendererProps, BasePropertyShape } from './PropertyRenderer';
-import { classNames } from '@/utils/classNames';
+import { classNames } from '../../utils/classNames';
 import './PropertiesWrapper.scss';
 
 export type BaseProperty = PropertyRendererProps['property'] & {

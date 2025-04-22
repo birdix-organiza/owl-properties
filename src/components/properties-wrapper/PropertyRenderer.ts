@@ -1,5 +1,5 @@
 import { Component, xml } from '@odoo/owl';
-import { classNames } from '@/utils/classNames';
+import { classNames } from '../../utils/classNames';
 import './PropertyRenderer.scss';
 
 export interface PropertyRendererProps {

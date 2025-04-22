@@ -1,11 +1,11 @@
-import { Empty } from '@/components/empty/Empty';
+import { Empty } from './components/empty/Empty';
 import {
   BaseProperty,
   PropertiesWrapper,
   PropertyWithHiddenShape,
-} from '@/components/properties-wrapper/PropertiesWrapper';
-import { Tab } from '@/components/tab/Tab';
-import { classNames } from '@/utils/classNames';
+} from './components/properties-wrapper/PropertiesWrapper';
+import { Tab } from './components/tab/Tab';
+import { classNames } from './utils/classNames';
 import { Component, useState, xml, useSubEnv, EventBus } from '@odoo/owl';
 import './index.scss';
 import { Input } from './components/renderer/Input';

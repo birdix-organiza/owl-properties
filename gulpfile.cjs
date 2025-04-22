@@ -3,7 +3,6 @@ const ts = require('gulp-typescript');
 const sass = require('gulp-sass')(require('sass'));
 const replace = require('gulp-replace');
 const clean = require('gulp-clean');
-const alias = require('@gulp-plugin/alias');
 const merge = require('merge2');
 const fs = require('fs');
 
@@ -20,13 +19,8 @@ gulp.task('compile-scripts', function () {
   const tsResult = gulp
     .src('src/**/*.ts')
     .pipe(replace(/\.scss/g, '.css')) // 将scss路径替换为css路径
-    .pipe(tsProject())
-    .pipe(alias(tsProject.config));
-
-  const jsResult = gulp
-    .src('src/**/*.js')
-    .pipe(replace(/\.scss/g, '.css')) // 将scss路径替换为css路径
-    .pipe(alias(tsProject.config));
+    .pipe(tsProject());
+  const jsResult = gulp.src('src/**/*.js').pipe(replace(/\.scss/g, '.css')); // 将scss路径替换为css路径
 
   return merge(tsResult.pipe(gulp.dest('es')), jsResult.pipe(gulp.dest('es')));
 });
