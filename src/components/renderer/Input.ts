@@ -8,6 +8,7 @@ export class Input extends BaseRenderer {
   t-att-class="props.className"
   t-att-disabled="props.readonly"
   type="text"
+  t-att-placeholder="props.placeholder"
   t-att-value="props.value?.()"
   t-on-change="onChangeText"
 />

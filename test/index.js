@@ -40,22 +40,33 @@ class App extends Component {
           key: 'tab1',
           properties: [
             {
-              label: 'Group 1',
+              label: '属性',
               key: 'group1',
               type: 'input',
             },
             {
-              label: 'Group 2',
+              label: '样式',
               key: 'group2',
               type: 'text',
               extra: {},
             },
             {
-              label: 'Group 2',
+              label: '事件',
               key: 'group3',
               type: 'number',
               extra: {
                 step: 0.1,
+              },
+            },
+            {
+              label: '选择器',
+              key: 'group4',
+              type: 'select',
+              extra: {
+                options: [
+                  { label: '选项1', value: 'option1' },
+                  { label: '选项2', value: 'option2' },
+                ],
               },
             },
           ],

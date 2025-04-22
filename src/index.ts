@@ -12,6 +12,7 @@ import { Input } from './components/renderer/Input';
 import { Text } from './components/renderer/Text';
 import { BaseRenderer } from './components/renderer/BaseRenderer';
 import { Number } from './components/renderer/Number';
+import { Select } from './components/renderer/Select';
 
 export interface TabProps {
   label: string;
@@ -33,7 +34,7 @@ export interface PropertiesPanelProps {
 /**
  * Tab属性验证器
  */
-export const TabShape = {
+const TabShape = {
   label: String,
   key: String,
   icon: {
@@ -65,7 +66,7 @@ export const TabShape = {
 /**
  * 属性面板的Props验证器
  */
-export const PropertiesPanelPropsValidator = {
+const PropertiesPanelPropsValidator = {
   defaultActive: {
     type: String,
     optional: true,
@@ -88,9 +89,9 @@ export const PropertiesPanelPropsValidator = {
   },
 };
 
-export const registry = new Map<string, typeof BaseRenderer>();
+const registry = new Map<string, typeof BaseRenderer>();
 
-export class PropertiesPanel extends Component<PropertiesPanelProps> {
+class PropertiesPanel extends Component<PropertiesPanelProps> {
   static props = PropertiesPanelPropsValidator;
 
   static defaultProps = {
@@ -172,3 +173,6 @@ export class PropertiesPanel extends Component<PropertiesPanelProps> {
 registry.set('input', Input);
 registry.set('text', Text);
 registry.set('number', Number);
+registry.set('select', Select);
+
+export { PropertiesPanel, registry, BaseRenderer };

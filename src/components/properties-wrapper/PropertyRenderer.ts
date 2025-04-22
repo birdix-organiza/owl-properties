@@ -6,6 +6,7 @@ export interface PropertyRendererProps {
   property: {
     label: string;
     key: string;
+    placeholder?: string;
     value?: () => any;
     extra?: Record<string, any>;
     type?: String;
@@ -24,6 +25,10 @@ export const BasePropertyShape = {
   key: String,
   value: {
     type: Function,
+    optional: true,
+  },
+  placeholder: {
+    type: String,
     optional: true,
   },
   extra: {
@@ -72,9 +77,5 @@ export class PropertyRenderer extends Component<PropertyRendererProps> {
 
   getComponent(type: string): typeof Component {
     return (this.env.registry as Map<string, typeof Component>).get(type);
-  }
-
-  setup(): void {
-    console.log(this.env);
   }
 }

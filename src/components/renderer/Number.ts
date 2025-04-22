@@ -9,6 +9,7 @@ export class Number extends BaseRenderer {
     t-att-disabled="props.readonly"
     t-att-value="this.numberFormatter(props.value?.())"
     type="number"
+    t-att-placeholder="props.placeholder"
     t-att-step="props.extra.step"
     t-att-min="props.extra.min"
     t-att-max="props.extra.max"

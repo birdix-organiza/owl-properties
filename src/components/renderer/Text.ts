@@ -10,6 +10,7 @@ export class Text extends Input {
   t-att-disabled="props.readonly"
   t-att-value="props.value?.()"
   t-on-change="onChangeText"
+  t-att-placeholder="props.placeholder"
   t-att-rows="props.extra.rows || 1"
   style="resize: vertical;"
 />
