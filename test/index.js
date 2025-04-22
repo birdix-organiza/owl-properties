@@ -47,9 +47,16 @@ class App extends Component {
             {
               label: 'Group 2',
               key: 'group2',
+              type: 'text',
+              extra: {},
+            },
+            {
+              label: 'Group 2',
+              key: 'group3',
               type: 'number',
-              decimals: 2,
-              step: 0.01,
+              extra: {
+                step: 0.1,
+              },
             },
           ],
         },

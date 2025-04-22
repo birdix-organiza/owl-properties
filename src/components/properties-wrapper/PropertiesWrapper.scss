@@ -1,0 +1,14 @@
+.pro-properties-wrapper {
+  display: grid;
+  gap: 10px;
+  padding: 10px;
+
+  .pro-property-item {
+    min-width: 0;
+    width: 100%;
+    min-height: 55px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+}

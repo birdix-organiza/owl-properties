@@ -1,18 +1,23 @@
-import { Component, xml, useState } from '@odoo/owl';
-import { Tab, TabItemShape } from '@/components/tab/Tab';
-import { classNames } from '@/utils/classNames';
 import { Empty } from '@/components/empty/Empty';
 import {
-  PropertiesWrapper,
   BaseProperty,
+  PropertiesWrapper,
   PropertyWithHiddenShape,
 } from '@/components/properties-wrapper/PropertiesWrapper';
+import { Tab } from '@/components/tab/Tab';
+import { classNames } from '@/utils/classNames';
+import { Component, useState, xml, useSubEnv, EventBus } from '@odoo/owl';
 import './index.scss';
+import { Input } from './components/renderer/Input';
+import { Text } from './components/renderer/Text';
+import { BaseRenderer } from './components/renderer/BaseRenderer';
+import { Number } from './components/renderer/Number';
 
 export interface TabProps {
   label: string;
   key: string;
   icon?: string;
+  cols?: number;
   component?: Component;
   props?: Record<string, any>;
   properties?: Array<BaseProperty>;
@@ -33,6 +38,10 @@ export const TabShape = {
   key: String,
   icon: {
     type: String,
+    optional: true,
+  },
+  cols: {
+    type: Number,
     optional: true,
   },
   component: {
@@ -79,6 +88,8 @@ export const PropertiesPanelPropsValidator = {
   },
 };
 
+export const registry = new Map<string, typeof BaseRenderer>();
+
 export class PropertiesPanel extends Component<PropertiesPanelProps> {
   static props = PropertiesPanelPropsValidator;
 
@@ -97,7 +108,7 @@ export class PropertiesPanel extends Component<PropertiesPanelProps> {
   static componentTemplate = `
     <t t-if="tab.component" t-component="tab.component" t-props="tab.props"/>
     <t t-else="">
-      <PropertiesWrapper properties="tab.properties"/>
+      <PropertiesWrapper properties="tab.properties" cols="tab.cols"/>
     </t>
   `;
 
@@ -132,6 +143,8 @@ export class PropertiesPanel extends Component<PropertiesPanelProps> {
     active: this.props.defaultActive,
   });
 
+  bus: EventBus;
+
   omitProps() {
     return this.props.tabs.map(({ label, key, icon }) => {
       return {
@@ -146,4 +159,16 @@ export class PropertiesPanel extends Component<PropertiesPanelProps> {
     this.state.active = key;
     this.props.onChangeTab?.(key);
   }
+
+  setup(): void {
+    this.bus = new EventBus();
+    useSubEnv({
+      registry,
+      bus: this.bus,
+    });
+  }
 }
+
+registry.set('input', Input);
+registry.set('text', Text);
+registry.set('number', Number);

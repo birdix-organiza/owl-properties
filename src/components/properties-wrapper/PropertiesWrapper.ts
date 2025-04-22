@@ -1,6 +1,7 @@
 import { Component, xml } from '@odoo/owl';
 import { PropertyRenderer, PropertyRendererProps, BasePropertyShape } from './PropertyRenderer';
 import { classNames } from '@/utils/classNames';
+import './PropertiesWrapper.scss';
 
 export type BaseProperty = PropertyRendererProps['property'] & {
   hidden?: () => boolean;
@@ -8,6 +9,7 @@ export type BaseProperty = PropertyRendererProps['property'] & {
 
 export interface PropertiesWrapperProps {
   properties: Array<BaseProperty>;
+  cols?: number;
 }
 
 /**
@@ -33,6 +35,10 @@ export const PropertiesWrapperPropsValidator = {
       shape: PropertyWithHiddenShape,
     },
   },
+  cols: {
+    type: Number,
+    optional: true,
+  },
 };
 
 export class PropertiesWrapper extends Component<PropertiesWrapperProps> {
@@ -40,6 +46,7 @@ export class PropertiesWrapper extends Component<PropertiesWrapperProps> {
 
   static defaultProps = {
     properties: [],
+    cols: 2,
   };
 
   static components = {
@@ -52,9 +59,9 @@ export class PropertiesWrapper extends Component<PropertiesWrapperProps> {
   }
 
   static template = xml`
-    <div class="${classNames('&properties-wrapper')}">
+    <div class="${classNames('&properties-wrapper')}" t-attf-style="grid-template-columns: repeat({{props.cols}}, 1fr);">
       <t t-foreach="props.properties" t-as="property" t-key="property.key">
-        <div class="${classNames('&property-item')}" t-if="!property.hidden?.()">
+        <div class="${classNames('&property-item')}" t-if="!property.hidden?.()" t-att-data-type="property.type">
             <label class="${classNames('&property-label')}" t-att-class="property.required ? 'required' : ''">
                 <t t-esc="property.label"/>
             </label>
