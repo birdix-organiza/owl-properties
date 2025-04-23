@@ -1,5 +1,5 @@
+import { PropertiesPanel } from '../src/index';
 import { Component, mount, useState, xml } from '@odoo/owl';
-import { PropertiesPanel } from '@/index';
 
 class TabContent extends Component {
   static props = {
@@ -28,12 +28,13 @@ class App extends Component {
   static template = xml`
 <div style="width: 100%; height: 100%;padding: 10px;box-sizing: border-box;">
   <div style="width: 300px; height: 100%;background-color: white;">
-    <PropertiesPanel tabs="state.tabs" defaultActive="'tab1'"/>
+    <PropertiesPanel tabs="state.tabs" defaultActive="state.active"/>
   </div>
 </div>`;
 
   setup() {
     this.state = useState({
+      active: 'tab1',
       tabs: [
         {
           label: 'Tab 1',

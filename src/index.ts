@@ -6,7 +6,7 @@ import {
 } from './components/properties-wrapper/PropertiesWrapper';
 import { Tab } from './components/tab/Tab';
 import { classNames } from './utils/classNames';
-import { Component, useState, xml, useSubEnv, EventBus } from '@odoo/owl';
+import { Component, useState, xml, useSubEnv, EventBus, useEffect } from '@odoo/owl';
 import './index.scss';
 import { Input } from './components/renderer/Input';
 import { Text } from './components/renderer/Text';
@@ -167,6 +167,13 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
       registry,
       bus: this.bus,
     });
+
+    useEffect(
+      () => {
+        this.state.active = this.props.defaultActive;
+      },
+      () => [this.props.defaultActive],
+    );
   }
 }
 
