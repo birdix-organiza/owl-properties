@@ -1,18 +1,18 @@
+import { Component, EventBus, useSubEnv, xml } from '@odoo/owl';
 import { Empty } from './components/empty/Empty';
 import {
   BaseProperty,
   PropertiesWrapper,
   PropertyWithHiddenShape,
 } from './components/properties-wrapper/PropertiesWrapper';
-import { Tab } from './components/tab/Tab';
-import { classNames } from './utils/classNames';
-import { Component, useState, xml, useSubEnv, EventBus, useEffect } from '@odoo/owl';
-import './index.scss';
-import { Input } from './components/renderer/Input';
-import { Text } from './components/renderer/Text';
 import { BaseRenderer } from './components/renderer/BaseRenderer';
+import { Input } from './components/renderer/Input';
 import { Number } from './components/renderer/Number';
 import { Select } from './components/renderer/Select';
+import { Text } from './components/renderer/Text';
+import { Tab } from './components/tab/Tab';
+import './index.scss';
+import { classNames } from './utils/classNames';
 
 export interface TabProps {
   label: string;
@@ -67,7 +67,7 @@ const TabShape = {
  * 属性面板的Props验证器
  */
 const PropertiesPanelPropsValidator = {
-  defaultActive: {
+  active: {
     type: String,
     optional: true,
   },
@@ -95,7 +95,7 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
   static props = PropertiesPanelPropsValidator;
 
   static defaultProps = {
-    defaultActive: '',
+    active: '',
     tabs: [],
     forceRender: false,
   };
@@ -116,17 +116,17 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
   static template = xml`
     <div class="${classNames('&properties-panel')}">
       <div t-if="props.tabs.length" class="${classNames('&properties-tabs-container')}">
-        <Tab tabs="omitProps()" active="state.active" onChange.bind="onChangeTab" className="'${classNames('&properties-tab')}'"/>
+        <Tab tabs="omitProps()" active="props.active" onChange="props.onChangeTab" className="'${classNames('&properties-tab')}'"/>
         <div class="${classNames('&properties-tab-content-container')}">
           <t t-if="props.forceRender">
             <div t-foreach="props.tabs" t-as="tab" t-key="tab.key" 
                class="${classNames('&properties-tab-content')}"
-               t-att-class="{ invisible: state.active !== tab.key, '${classNames('&properties-tab-active')}': state.active === tab.key }">
+               t-att-class="{ invisible: props.active !== tab.key, '${classNames('&properties-tab-active')}': props.active === tab.key }">
               ${PropertiesPanel.componentTemplate}
             </div>
           </t>
           <t t-else="">
-            <t t-foreach="props.tabs.filter((tab) => tab.key === state.active)" t-as="tab" t-key="tab.key">
+            <t t-foreach="props.tabs.filter((tab) => tab.key === props.active)" t-as="tab" t-key="tab.key">
               <div class="${classNames('&properties-tab-content')} ${classNames('&properties-tab-active')}">
                 ${PropertiesPanel.componentTemplate}
               </div>
@@ -140,10 +140,6 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
     </div>
   `;
 
-  state = useState({
-    active: this.props.defaultActive,
-  });
-
   bus: EventBus;
 
   omitProps() {
@@ -156,24 +152,12 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
     });
   }
 
-  onChangeTab(key: string) {
-    this.state.active = key;
-    this.props.onChangeTab?.(key);
-  }
-
   setup(): void {
     this.bus = new EventBus();
     useSubEnv({
       registry,
       bus: this.bus,
     });
-
-    useEffect(
-      () => {
-        this.state.active = this.props.defaultActive;
-      },
-      () => [this.props.defaultActive],
-    );
   }
 }
 
@@ -182,4 +166,4 @@ registry.set('text', Text);
 registry.set('number', Number);
 registry.set('select', Select);
 
-export { PropertiesPanel, registry, BaseRenderer };
+export { BaseRenderer, PropertiesPanel, registry };

@@ -28,7 +28,7 @@ class App extends Component {
   static template = xml`
 <div style="width: 100%; height: 100%;padding: 10px;box-sizing: border-box;">
   <div style="width: 300px; height: 100%;background-color: white;">
-    <PropertiesPanel tabs="state.tabs" defaultActive="state.active"/>
+    <PropertiesPanel tabs="state.tabs" active="state.active" onChangeTab.bind="onChangeTab" />
   </div>
 </div>`;
 
@@ -122,6 +122,10 @@ class App extends Component {
         },
       ],
     });
+  }
+
+  onChangeTab(key) {
+    this.state.active = key;
   }
 }
 

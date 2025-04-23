@@ -10,15 +10,15 @@ export class Number extends BaseRenderer {
     t-att-value="this.numberFormatter(props.value?.())"
     type="number"
     t-att-placeholder="props.placeholder"
-    t-att-step="props.extra.step"
-    t-att-min="props.extra.min"
-    t-att-max="props.extra.max"
+    t-att-step="props.extra?.step"
+    t-att-min="props.extra?.min"
+    t-att-max="props.extra?.max"
     t-on-change="onChangeFloat"
 />
   `;
 
   getDecimals() {
-    return this.props.extra.decimals ?? 1;
+    return this.props.extra?.decimals ?? 1;
   }
 
   numberFormatter(value?: number) {
