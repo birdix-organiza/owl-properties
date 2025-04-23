@@ -25,7 +25,7 @@ export interface TabProps {
 }
 
 export interface PropertiesPanelProps {
-  defaultActive?: string;
+  active?: string;
   tabs?: Array<TabProps>;
   forceRender?: boolean;
   onChangeTab?: (tab: string) => void;
