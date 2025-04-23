@@ -1,6 +1,6 @@
 {
   "name": "owl-properties",
-  "version": "1.2.3",
+  "version": "1.3.0",
   "description": "properties kanban uesd in odoo owl2",
   "main": "es/index.js",
   "scripts": {

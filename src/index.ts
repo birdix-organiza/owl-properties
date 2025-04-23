@@ -29,6 +29,7 @@ export interface PropertiesPanelProps {
   tabs?: Array<TabProps>;
   forceRender?: boolean;
   onChangeTab?: (tab: string) => void;
+  ref?: (instance: PropertiesPanel) => void;
 }
 
 /**
@@ -84,6 +85,10 @@ const PropertiesPanelPropsValidator = {
     optional: true,
   },
   onChangeTab: {
+    type: Function,
+    optional: true,
+  },
+  ref: {
     type: Function,
     optional: true,
   },
@@ -153,6 +158,7 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
   }
 
   setup(): void {
+    this.props.ref?.(this);
     this.bus = new EventBus();
     useSubEnv({
       registry,
