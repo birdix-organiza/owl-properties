@@ -4,6 +4,7 @@ import './PropertyRenderer.scss';
 
 export interface PropertyRendererProps {
   property: {
+    span?: number;
     label: string;
     key: string;
     placeholder?: string;
@@ -25,6 +26,10 @@ export const BasePropertyShape = {
   key: String,
   value: {
     type: Function,
+    optional: true,
+  },
+  span: {
+    type: Number,
     optional: true,
   },
   placeholder: {

@@ -52,6 +52,7 @@ class App extends Component {
               extra: {},
             },
             {
+              span: 2,
               label: '事件',
               key: 'group3',
               type: 'number',

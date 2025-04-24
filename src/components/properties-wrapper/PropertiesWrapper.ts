@@ -61,7 +61,7 @@ export class PropertiesWrapper extends Component<PropertiesWrapperProps> {
   static template = xml`
     <div class="${classNames('&properties-wrapper')}" t-attf-style="grid-template-columns: repeat({{props.cols}}, 1fr);">
       <t t-foreach="props.properties" t-as="property" t-key="property.key">
-        <div class="${classNames('&property-item')}" t-if="!property.hidden?.()" t-att-data-type="property.type">
+        <div class="${classNames('&property-item')}" t-if="!property.hidden?.()" t-att-data-type="property.type" t-attf-style="grid-column-end: span {{property.span ?? 1}};">
             <label class="${classNames('&property-label')}" t-att-class="property.required ? 'required' : ''">
                 <t t-esc="property.label"/>
             </label>
