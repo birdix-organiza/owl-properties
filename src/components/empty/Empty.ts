@@ -3,6 +3,8 @@ import './Empty.scss';
 import { classNames } from '../../utils/classNames';
 
 export class Empty extends Component {
+  static props = {};
+
   static template = xml`
     <div class="${classNames('&empty')}">
       <t t-slot="image">
