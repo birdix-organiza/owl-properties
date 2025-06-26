@@ -71,6 +71,11 @@ class App extends Component {
                 ],
               },
             },
+            {
+              label: '布尔选择器',
+              key: 'group5',
+              type: 'boolean',
+            },
           ],
         },
         {

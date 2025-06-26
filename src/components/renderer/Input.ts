@@ -1,4 +1,4 @@
-import { xml } from '@odoo/owl';
+import { xml, useState } from '@odoo/owl';
 import { BaseRenderer } from './BaseRenderer';
 
 export class Input extends BaseRenderer {
@@ -6,16 +6,21 @@ export class Input extends BaseRenderer {
 <input
   class="input"
   t-att-class="props.className"
-  t-att-disabled="props.readonly"
+  t-att-disabled="readonly"
   type="text"
   t-att-placeholder="props.placeholder"
-  t-att-value="props.value?.()"
+  t-model="state.value"
   t-on-change="onChangeText"
 />
   `;
 
+  state = useState({
+    value: this.props.value?.() ?? '',
+  });
+
   onChangeText(ev: Event) {
     const val = (ev.target as HTMLInputElement).value;
+    this.state.value = val;
     this.props.onChange?.(val);
     this.fireChange(val);
   }

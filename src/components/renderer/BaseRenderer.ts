@@ -52,6 +52,10 @@ export class BaseRenderer extends Component<
     },
   };
 
+  get readonly() {
+    return this.props.readonly?.();
+  }
+
   // notify in bus if need
   fireChange(value: any) {
     this.env.bus.trigger(this.props.key, value);

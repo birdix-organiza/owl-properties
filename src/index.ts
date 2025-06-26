@@ -11,6 +11,7 @@ import { Number } from './components/renderer/Number';
 import { Select } from './components/renderer/Select';
 import { Text } from './components/renderer/Text';
 import { Tab } from './components/tab/Tab';
+import { Boolean } from './components/renderer/Boolean';
 import './index.scss';
 import { classNames } from './utils/classNames';
 
@@ -171,5 +172,6 @@ registry.set('input', Input);
 registry.set('text', Text);
 registry.set('number', Number);
 registry.set('select', Select);
+registry.set('boolean', Boolean);
 
 export { BaseRenderer, PropertiesPanel, registry };

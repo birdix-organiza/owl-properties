@@ -1,4 +1,4 @@
-import { xml } from '@odoo/owl';
+import { xml, useState } from '@odoo/owl';
 import { BaseRenderer } from './BaseRenderer';
 
 export class Number extends BaseRenderer {
@@ -6,8 +6,8 @@ export class Number extends BaseRenderer {
 <input
     class="input"
     t-att-class="props.className"
-    t-att-disabled="props.readonly"
-    t-att-value="this.numberFormatter(props.value?.())"
+    t-att-disabled="readonly"
+    t-model="state.value"
     type="number"
     t-att-placeholder="props.placeholder"
     t-att-step="props.extra?.step"
@@ -16,6 +16,10 @@ export class Number extends BaseRenderer {
     t-on-change="onChangeFloat"
 />
   `;
+
+  state = useState({
+    value: this.numberFormatter(this.props.value?.()),
+  });
 
   getDecimals() {
     return this.props.extra?.decimals ?? 1;
@@ -38,6 +42,9 @@ export class Number extends BaseRenderer {
     // 根据指定的小数位数进行四舍五入
     val = Math.round(val * factor) / factor;
     (ev.target as HTMLInputElement).value = val.toString();
-    this.props.onChange?.(val);
+    const newValue = this.numberFormatter(val);
+    this.state.value = newValue;
+    this.props.onChange?.(newValue);
+    this.fireChange(newValue);
   }
 }
