@@ -39,14 +39,6 @@ export default defineConfig([
       '@stylistic/multiline-comment-style': 'off',
       // 尾随逗号配置
       '@stylistic/comma-dangle': ['error', 'only-multiline'],
-      'no-extra-parens': [
-        'error',
-        'all',
-        {
-          // 禁用 JSX 中的多余括号检测
-          ignoreJSX: 'all',
-        },
-      ],
       // 指定接口成员间换行风格['semi', 'comma', 'none']，文档说默认`semi`,但实际提示多余'semi',因此指定需要 semi；
       '@stylistic/member-delimiter-style': [
         'error',
@@ -89,14 +81,7 @@ export default defineConfig([
       '@stylistic/ts/quote-props': 'off',
       '@stylistic/ts/object-curly-spacing': ['error', 'always'],
       '@stylistic/ts/space-before-function-paren': 'off',
-      '@stylistic/ts/no-extra-parens': [
-        'error',
-        'all',
-        {
-          // 禁用 JSX 中的多余括号检测
-          ignoreJSX: 'all',
-        },
-      ],
+      '@stylistic/ts/no-extra-parens': ['off'],
       '@stylistic/ts/comma-dangle': ['error', 'only-multiline'],
       '@stylistic/member-delimiter-style': [
         'error',

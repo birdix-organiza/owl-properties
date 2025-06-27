@@ -11,7 +11,8 @@ import { Number } from './components/renderer/Number';
 import { Select } from './components/renderer/Select';
 import { Text } from './components/renderer/Text';
 import { Tab } from './components/tab/Tab';
-import { Boolean } from './components/renderer/Boolean';
+import { Switch } from './components/renderer/Switch';
+import { Slider } from './components/renderer/Slider';
 import './index.scss';
 import { classNames } from './utils/classNames';
 
@@ -172,6 +173,7 @@ registry.set('input', Input);
 registry.set('text', Text);
 registry.set('number', Number);
 registry.set('select', Select);
-registry.set('boolean', Boolean);
+registry.set('switch', Switch);
+registry.set('slider', Slider);
 
 export { BaseRenderer, PropertiesPanel, registry };

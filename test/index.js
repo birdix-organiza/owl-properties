@@ -74,7 +74,17 @@ class App extends Component {
             {
               label: '布尔选择器',
               key: 'group5',
-              type: 'boolean',
+              type: 'switch',
+            },
+            {
+              label: '滑块选择器',
+              key: 'group6',
+              type: 'slider',
+              extra: {
+                max: 5,
+                step: 0.1,
+                decimals: 1,
+              },
             },
           ],
         },

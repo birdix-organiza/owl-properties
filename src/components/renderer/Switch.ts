@@ -1,9 +1,9 @@
 import { useState, xml } from '@odoo/owl';
 import { BaseRenderer } from './BaseRenderer';
 
-export class Boolean extends BaseRenderer {
+export class Switch extends BaseRenderer {
   static template = xml`
-    <div class="boolean" t-att-class="props.className">
+    <div class="switch" t-att-class="props.className">
       <div class="pro-switch" t-att-class="state.value ? 'on' : 'off' + (readonly ? ' pro-switch-disabled' : '')" t-on-click="onToggle">
       <span class="pro-switch-inner">
         <span class="pro-switch-inner-checked"><t t-esc="props.extra?.trueLabel || '开启'" /></span>
