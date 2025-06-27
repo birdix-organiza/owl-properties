@@ -21,8 +21,8 @@
 
       &:focus {
         outline: none;
-        border-color: #4a90e2;
-        box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+        border-color: rgba(var(--pto-primary-color), 0.8);
+        box-shadow: 0 0 0 2px rgba(var(--pto-primary-color), 0.2);
       }
     }
 
@@ -71,7 +71,7 @@
       }
 
       .pro-switch.on {
-        background: #1677ff;
+        background: rgba(var(--pto-primary-color), 0.8);
       }
 
       .pro-switch.pro-switch-disabled {
