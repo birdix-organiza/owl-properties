@@ -8,7 +8,7 @@ export interface PropertyRendererProps {
     label: string;
     key: string;
     placeholder?: string;
-    value?: () => any;
+    value?: any;
     extra?: Record<string, any>;
     type?: String;
     required?: boolean;
@@ -25,7 +25,6 @@ export const BasePropertyShape = {
   label: String,
   key: String,
   value: {
-    type: Function,
     optional: true,
   },
   span: {

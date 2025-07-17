@@ -18,8 +18,8 @@ export class Slider extends BaseRenderer {
              t-on-blur="onHandleBlur"
              t-ref="handle"
              tabindex="0"
-             t-att-class="{'active': state.dragging || state.focused}">
-          <t t-if="props.extra?.showBubble || state.showBubble || state.dragging || state.focused">
+             t-att-class="{'active': sliderState.dragging || sliderState.focused}">
+          <t t-if="props.extra?.showBubble || sliderState.showBubble || sliderState.dragging || sliderState.focused">
             <div class="pro-slider-bubble">
               <t t-esc="formatValue(state.value)"/>
             </div>
@@ -33,6 +33,10 @@ export class Slider extends BaseRenderer {
 
   get decimals() {
     return this.props.extra?.decimals ?? 0;
+  }
+
+  format(value: any) {
+    return value ?? this.min;
   }
 
   formatValue(value: number) {
@@ -51,8 +55,7 @@ export class Slider extends BaseRenderer {
     return this.props.extra?.step ?? 1;
   }
 
-  state = useState({
-    value: this.props.value?.() ?? this.min,
+  sliderState = useState({
     showBubble: false,
     dragging: false,
     focused: false,
@@ -77,7 +80,7 @@ export class Slider extends BaseRenderer {
   }
 
   handleDragStart() {
-    this.state.dragging = true;
+    this.sliderState.dragging = true;
     document.addEventListener('mousemove', this.onMouseMove);
     document.addEventListener('mouseup', this.onMouseUp);
   }
@@ -95,32 +98,32 @@ export class Slider extends BaseRenderer {
   }
 
   onMouseMove = (ev: MouseEvent) => {
-    if (!this.state.dragging) return;
+    if (!this.sliderState.dragging) return;
     this.setValueFromPosition(ev.clientX);
   };
 
   onMouseUp = () => {
-    this.state.dragging = false;
+    this.sliderState.dragging = false;
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
   };
 
   onHandleMouseEnter = () => {
-    this.state.showBubble = true;
+    this.sliderState.showBubble = true;
   };
 
   onHandleMouseLeave = () => {
-    this.state.showBubble = false;
+    this.sliderState.showBubble = false;
   };
 
   onHandleFocus = () => {
-    this.state.focused = true;
+    this.sliderState.focused = true;
     document.addEventListener('keydown', this.onKeyDown);
     document.addEventListener('keyup', this.onKeyUp);
   };
 
   onHandleBlur = () => {
-    this.state.focused = false;
+    this.sliderState.focused = false;
     document.removeEventListener('keydown', this.onKeyDown);
     document.removeEventListener('keyup', this.onKeyUp);
     this.clearKeyInterval();
@@ -133,7 +136,7 @@ export class Slider extends BaseRenderer {
   keyDirection: 1 | -1 | null = null;
 
   onKeyDown = (ev: KeyboardEvent) => {
-    if (!this.state.focused) return;
+    if (!this.sliderState.focused) return;
     if (ev.key === 'ArrowLeft' || ev.key === 'ArrowRight') {
       ev.preventDefault();
       const direction = ev.key === 'ArrowLeft' ? -1 : 1;

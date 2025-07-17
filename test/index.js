@@ -1,5 +1,5 @@
 import { PropertiesPanel } from '../src/index';
-import { Component, mount, useState, xml } from '@odoo/owl';
+import { Component, mount, useState, xml, useEffect } from '@odoo/owl';
 
 class TabContent extends Component {
   static props = {
@@ -32,7 +32,19 @@ class App extends Component {
   </div>
 </div>`;
 
+  testValue = 'test';
+
   setup() {
+    useEffect(
+      () => {
+        setTimeout(() => {
+          this.testValue = 'text2';
+          this.state.tabs[0].properties[1].value = this.testValue;
+        }, 2000);
+      },
+      () => [],
+    );
+
     this.state = useState({
       active: 'tab1',
       tabs: [
@@ -50,6 +62,7 @@ class App extends Component {
               key: 'group2',
               type: 'text',
               extra: {},
+              value: this.testValue,
             },
             {
               span: 2,

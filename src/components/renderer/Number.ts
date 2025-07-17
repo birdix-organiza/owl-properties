@@ -1,4 +1,4 @@
-import { xml, useState } from '@odoo/owl';
+import { xml } from '@odoo/owl';
 import { BaseRenderer } from './BaseRenderer';
 
 export class Number extends BaseRenderer {
@@ -17,9 +17,9 @@ export class Number extends BaseRenderer {
 />
   `;
 
-  state = useState({
-    value: this.numberFormatter(this.props.value?.()),
-  });
+  format(value: any) {
+    return this.numberFormatter(value);
+  }
 
   getDecimals() {
     return this.props.extra?.decimals ?? 1;

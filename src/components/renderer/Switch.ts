@@ -1,4 +1,4 @@
-import { useState, xml } from '@odoo/owl';
+import { xml } from '@odoo/owl';
 import { BaseRenderer } from './BaseRenderer';
 
 export class Switch extends BaseRenderer {
@@ -14,9 +14,9 @@ export class Switch extends BaseRenderer {
     </div>
   `;
 
-  state = useState({
-    value: this.props.value?.() ?? false,
-  });
+  format(value: any) {
+    return value ?? false;
+  }
 
   onToggle() {
     if (this.readonly) return;

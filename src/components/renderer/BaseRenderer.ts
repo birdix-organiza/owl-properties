@@ -1,4 +1,4 @@
-import { Component, type EventBus } from '@odoo/owl';
+import { Component, type EventBus, useState, useEffect } from '@odoo/owl';
 import { PropertyRendererProps } from '../properties-wrapper/PropertyRenderer';
 
 type BaseRendererProps = PropertyRendererProps['property'] & {
@@ -23,7 +23,6 @@ export class BaseRenderer extends Component<
       optional: true,
     },
     value: {
-      type: Function,
       optional: true,
     },
     type: {
@@ -56,8 +55,30 @@ export class BaseRenderer extends Component<
     return this.props.readonly?.();
   }
 
+  state = useState({
+    value: this.format(this.props.value),
+  });
+
+  /**
+   * inherit this func to change the render value
+   * @param value
+   * @returns
+   */
+  format(value: any) {
+    return value;
+  }
+
   // notify in bus if need
   fireChange(value: any) {
     this.env.bus.trigger(this.props.key, value);
+  }
+
+  setup(): void {
+    useEffect(
+      () => {
+        this.state.value = this.format(this.props.value);
+      },
+      () => [this.props.value],
+    );
   }
 }

@@ -1,4 +1,4 @@
-import { xml, useState } from '@odoo/owl';
+import { xml } from '@odoo/owl';
 import { BaseRenderer } from './BaseRenderer';
 
 export class Input extends BaseRenderer {
@@ -14,9 +14,9 @@ export class Input extends BaseRenderer {
 />
   `;
 
-  state = useState({
-    value: this.props.value?.() ?? '',
-  });
+  format(value: any) {
+    return value ?? '';
+  }
 
   onChangeText(ev: Event) {
     const val = (ev.target as HTMLInputElement).value;

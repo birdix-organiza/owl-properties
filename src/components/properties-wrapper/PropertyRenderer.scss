@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .pro-property-renderer {
   width: 100%;
 
@@ -152,7 +154,7 @@
 
       display: flex;
       align-items: center;
-      padding: 0 $handle-width/2;
+      padding: 0 math.div($handle-width, 2);
       .pro-slider {
         position: relative;
         width: 160px;

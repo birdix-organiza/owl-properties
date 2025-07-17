@@ -1,4 +1,4 @@
-import { useState, xml } from '@odoo/owl';
+import { xml } from '@odoo/owl';
 import { BaseRenderer } from './BaseRenderer';
 
 export class Select extends BaseRenderer {
@@ -19,9 +19,9 @@ export class Select extends BaseRenderer {
 </select>
   `;
 
-  state = useState({
-    value: this.props.value?.() ?? '',
-  });
+  format(value: any) {
+    return value ?? '';
+  }
 
   onChangeSelect(ev: Event) {
     const val = (ev.target as HTMLSelectElement).value;
