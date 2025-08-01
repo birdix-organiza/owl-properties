@@ -98,6 +98,9 @@ class App extends Component {
                 step: 0.1,
                 decimals: 1,
               },
+              onChange: (value, options) => {
+                console.log(value, options);
+              },
             },
           ],
         },

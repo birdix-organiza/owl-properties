@@ -75,7 +75,9 @@ export class Slider extends BaseRenderer {
     value = Math.round(value / this.step) * this.step;
     value = Math.max(this.min, Math.min(this.max, value));
     this.state.value = value;
-    this.props.onChange?.(value);
+    this.props.onChange?.(value, {
+      isInputing: true,
+    });
     this.fireChange(value);
   }
 
@@ -104,6 +106,7 @@ export class Slider extends BaseRenderer {
 
   onMouseUp = () => {
     this.sliderState.dragging = false;
+    this.props.onChange?.(this.state.value);
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
   };
@@ -157,6 +160,7 @@ export class Slider extends BaseRenderer {
     if (ev.key === 'ArrowLeft' || ev.key === 'ArrowRight') {
       this.clearKeyInterval();
       this.keyDirection = null;
+      this.props.onChange?.(this.state.value);
     }
   };
 
@@ -176,7 +180,9 @@ export class Slider extends BaseRenderer {
     value = Math.max(this.min, Math.min(this.max, value));
     if (value !== this.state.value) {
       this.state.value = value;
-      this.props.onChange?.(value);
+      this.props.onChange?.(value, {
+        isInputing: true,
+      });
       this.fireChange(value);
     }
   }

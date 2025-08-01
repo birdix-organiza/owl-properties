@@ -13,7 +13,7 @@ export interface PropertyRendererProps {
     type?: String;
     required?: boolean;
     readonly?: () => boolean;
-    onChange?: (value: any) => void;
+    onChange?: (value: any, options?: Record<string, any>) => void;
   };
 }
 
