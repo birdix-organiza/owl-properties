@@ -10,7 +10,7 @@ export class Select extends BaseRenderer {
   t-model="state.value"
   t-on-change="onChangeSelect"
 >
-  <option t-if="props.placeholder" value="" selected="!state.value">{{props.placeholder}}</option>
+  <option t-if="props.placeholder" value="" selected="!state.value"><t t-esc="props.placeholder"/></option>
   <t t-foreach="options" t-as="option" t-key="option.value">
     <option t-att-value="option.value">
       <t t-esc="option.label" />
