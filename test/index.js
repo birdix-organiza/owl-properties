@@ -56,6 +56,7 @@ class App extends Component {
               label: '属性',
               key: 'group1',
               type: 'input',
+              readonly: () => true,
             },
             {
               label: '样式',
@@ -77,6 +78,7 @@ class App extends Component {
               label: '选择器',
               key: 'group4',
               type: 'select',
+              readonly: () => true,
               extra: {
                 options: [
                   { label: '选项1', value: 'option1' },
@@ -88,11 +90,13 @@ class App extends Component {
               label: '布尔选择器',
               key: 'group5',
               type: 'switch',
+              readonly: () => true,
             },
             {
               label: '滑块选择器',
               key: 'group6',
               type: 'slider',
+              readonly: () => true,
               extra: {
                 max: 5,
                 step: 0.1,

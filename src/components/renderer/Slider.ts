@@ -5,6 +5,7 @@ export class Slider extends BaseRenderer {
   static template = xml`
     <div class="slider" t-att-class="props.className">
       <div class="pro-slider"
+           t-att-class="{'readonly': readonly}"
            t-on-mousedown="onTrackMouseDown"
            t-ref="track">
         <div class="pro-slider-rail"></div>
@@ -100,7 +101,7 @@ export class Slider extends BaseRenderer {
   }
 
   onMouseMove = (ev: MouseEvent) => {
-    if (!this.sliderState.dragging) return;
+    if (!this.sliderState.dragging || this.readonly) return;
     this.setValueFromPosition(ev.clientX);
   };
 
@@ -112,14 +113,17 @@ export class Slider extends BaseRenderer {
   };
 
   onHandleMouseEnter = () => {
+    if (this.readonly) return;
     this.sliderState.showBubble = true;
   };
 
   onHandleMouseLeave = () => {
+    if (this.readonly) return;
     this.sliderState.showBubble = false;
   };
 
   onHandleFocus = () => {
+    if (this.readonly) return;
     this.sliderState.focused = true;
     document.addEventListener('keydown', this.onKeyDown);
     document.addEventListener('keyup', this.onKeyUp);
@@ -139,7 +143,7 @@ export class Slider extends BaseRenderer {
   keyDirection: 1 | -1 | null = null;
 
   onKeyDown = (ev: KeyboardEvent) => {
-    if (!this.sliderState.focused) return;
+    if (!this.sliderState.focused || this.readonly) return;
     if (ev.key === 'ArrowLeft' || ev.key === 'ArrowRight') {
       ev.preventDefault();
       const direction = ev.key === 'ArrowLeft' ? -1 : 1;
@@ -157,6 +161,7 @@ export class Slider extends BaseRenderer {
   };
 
   onKeyUp = (ev: KeyboardEvent) => {
+    if (this.readonly) return;
     if (ev.key === 'ArrowLeft' || ev.key === 'ArrowRight') {
       this.clearKeyInterval();
       this.keyDirection = null;
@@ -176,6 +181,7 @@ export class Slider extends BaseRenderer {
   }
 
   changeValueByStep(direction: 1 | -1) {
+    if (this.readonly) return;
     let value = this.state.value + direction * this.step;
     value = Math.max(this.min, Math.min(this.max, value));
     if (value !== this.state.value) {
