@@ -118,4 +118,4 @@ yarn eslint
 
 ## 许可证
 
-LGPL-3.0
+MIT
