@@ -7,7 +7,7 @@ export class Text extends Input {
   type="text"
   class="textarea"
   t-att-class="props.className"
-  t-att-disabled="props.readonly"
+  t-att-disabled="readonly"
   t-att-value="state.value"
   t-on-change="onChangeText"
   t-att-placeholder="props.placeholder"
