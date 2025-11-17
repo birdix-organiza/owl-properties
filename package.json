@@ -26,12 +26,12 @@
     "classnames": "^2.3.2"
   },
   "peerDependencies": {
-    "@odoo/owl": "^2.3.0"
+    "@odoo/owl": "^2.4.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
     "@gulp-plugin/alias": "^2.2.2",
-    "@odoo/owl": "^2.3.0",
+    "@odoo/owl": "^2.4.1",
     "@stylistic/eslint-plugin": "^4.2.0",
     "@stylistic/eslint-plugin-ts": "^4.2.0",
     "@typescript-eslint/parser": "^8.29.1",
