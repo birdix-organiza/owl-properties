@@ -1,8 +1,9 @@
 import { Component, type EventBus, useState, useEffect } from '@odoo/owl';
-import { PropertyRendererProps } from '../properties-wrapper/PropertyRenderer';
 
-type BaseRendererProps = PropertyRendererProps['property'] & {
+type BaseRendererProps = Omit<PropertyItem, 'readonly' | 'required'> & {
   className?: string;
+  readonly: boolean;
+  required: boolean;
 };
 
 export class BaseRenderer extends Component<
@@ -35,11 +36,9 @@ export class BaseRenderer extends Component<
     },
     required: {
       type: Boolean,
-      optional: true,
     },
     readonly: {
-      type: Function,
-      optional: true,
+      type: Boolean,
     },
     onChange: {
       type: Function,
@@ -50,10 +49,6 @@ export class BaseRenderer extends Component<
       optional: true,
     },
   };
-
-  get readonly() {
-    return this.props.readonly?.();
-  }
 
   state = useState({
     value: this.format(this.props.value),
@@ -71,6 +66,19 @@ export class BaseRenderer extends Component<
   // notify in bus if need
   fireChange(value: any) {
     this.env.bus.trigger(this.props.key, value);
+  }
+
+  onChange(value: any, options: any) {
+    if (this.props.readonly) return;
+
+    if (this.props.required) {
+      if (!value) {
+        return;
+      }
+    }
+
+    this.props.onChange?.(value, options);
+    this.fireChange(value);
   }
 
   setup(): void {

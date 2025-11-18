@@ -2,12 +2,7 @@ import { PropertiesPanel } from '../src/index';
 import { Component, mount, useState, xml, useEffect } from '@odoo/owl';
 
 class TabContent extends Component {
-  static props = {
-    label: {
-      type: String,
-      optional: true,
-    },
-  };
+  static props = { '*': {} };
 
   static template = xml`
     <div>
@@ -28,11 +23,13 @@ class App extends Component {
   static template = xml`
 <div style="width: 100%; height: 100%;padding: 10px;box-sizing: border-box;">
   <div style="width: 300px; height: 100%;background-color: white;">
-    <PropertiesPanel tabs="state.tabs" active="state.active" onChangeTab.bind="onChangeTab" />
+    <PropertiesPanel ref="(r) => this.ref = r" tabs="state.tabs" active="state.active" onChangeTab.bind="onChangeTab" forceRender="false"/>
   </div>
 </div>`;
 
   testValue = 'test';
+
+  ref = undefined;
 
   setup() {
     useEffect(
@@ -40,12 +37,15 @@ class App extends Component {
         setTimeout(() => {
           this.testValue = 'text2';
           this.state.tabs[0].properties[1].value = this.testValue;
+          this.state.readonly = true;
+          this.ref.render(true);
         }, 2000);
       },
       () => [],
     );
 
     this.state = useState({
+      readonly: false,
       active: 'tab1',
       tabs: [
         {
@@ -56,7 +56,10 @@ class App extends Component {
               label: '属性',
               key: 'group1',
               type: 'input',
-              readonly: () => true,
+              required: () => true,
+              readonly: () => {
+                return this.state.readonly;
+              },
             },
             {
               label: '样式',
@@ -78,7 +81,6 @@ class App extends Component {
               label: '选择器',
               key: 'group4',
               type: 'select',
-              readonly: () => true,
               extra: {
                 options: [
                   { label: '选项1', value: 'option1' },
@@ -90,13 +92,11 @@ class App extends Component {
               label: '布尔选择器',
               key: 'group5',
               type: 'switch',
-              readonly: () => true,
             },
             {
               label: '滑块选择器',
               key: 'group6',
               type: 'slider',
-              readonly: () => true,
               extra: {
                 max: 5,
                 step: 0.1,
@@ -112,49 +112,6 @@ class App extends Component {
           label: 'Tab 2',
           key: 'tab2',
           component: TabContent,
-          props: {
-            label: 'Tab 2',
-          },
-        },
-        {
-          label: 'Tab 3',
-          key: 'tab3',
-          component: TabContent,
-          props: {
-            label: 'Tab 3',
-          },
-        },
-        {
-          label: 'Tab 4',
-          key: 'tab4',
-          component: TabContent,
-          props: {
-            label: 'Tab 4',
-          },
-        },
-        {
-          label: 'Tab 5',
-          key: 'tab5',
-          component: TabContent,
-          props: {
-            label: 'Tab 5',
-          },
-        },
-        {
-          label: 'Tab 6',
-          key: 'tab6',
-          component: TabContent,
-          props: {
-            label: 'Tab 6',
-          },
-        },
-        {
-          label: 'Tab 7',
-          key: 'tab7',
-          component: TabContent,
-          props: {
-            label: 'Tab 7',
-          },
         },
       ],
     });
