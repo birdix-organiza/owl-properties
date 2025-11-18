@@ -1,4 +1,6 @@
-interface PropertyItem {
+import type { Component } from '@odoo/owl';
+
+export interface PropertyItem {
   label: string;
   key: string;
   type: string;
@@ -11,7 +13,7 @@ interface PropertyItem {
   span?: number;
 }
 
-interface TabItem {
+export interface TabItem {
   label: string;
   key: string;
   properties?: PropertyItem[];

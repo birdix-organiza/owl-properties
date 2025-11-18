@@ -1,5 +1,6 @@
 import { Component, xml, useSubEnv, useEffect } from '@odoo/owl';
 import { classNames } from '../../utils/classNames';
+import type { TabItem, PropertyItem } from '../../type';
 import './PropertiesWrapper.scss';
 
 interface PropertiesWrapperProps {

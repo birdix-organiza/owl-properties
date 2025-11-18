@@ -8,6 +8,7 @@ import { Text } from './components/renderer/Text';
 import { Switch } from './components/renderer/Switch';
 import { Slider } from './components/renderer/Slider';
 import { PropertiesWrapper } from './components/properties/PropertiesWrapper';
+import type { PropertyItem, TabItem } from './type';
 
 import './index.scss';
 
@@ -137,3 +138,4 @@ registry.set('switch', Switch);
 registry.set('slider', Slider);
 
 export { BaseRenderer, PropertiesPanel, registry };
+export type { PropertyItem, TabItem };

@@ -1,4 +1,5 @@
 import { Component, type EventBus, useState, useEffect } from '@odoo/owl';
+import type { PropertyItem } from '../../type';
 
 type BaseRendererProps = Omit<PropertyItem, 'readonly' | 'required'> & {
   className?: string;
