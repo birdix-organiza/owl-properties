@@ -62,8 +62,8 @@
 
         &:focus {
           outline: none;
-          border-color: rgba(var(--pto-primary-color), 0.8);
-          box-shadow: 0 0 0 1px rgba(var(--pto-primary-color), 0.2);
+          border-color: rgba(var(--pro-primary-color), 0.8);
+          box-shadow: 0 0 0 1px rgba(var(--pro-primary-color), 0.2);
         }
 
         &:disabled {
@@ -115,7 +115,7 @@
         }
 
         .pro-switch.on {
-          background: rgba(var(--pto-primary-color), 0.8);
+          background: rgba(var(--pro-primary-color), 0.8);
         }
 
         .pro-switch.pro-switch-disabled {
@@ -215,8 +215,8 @@
           }
 
           &:not(.readonly) .pro-slider-handle:hover {
-            box-shadow: 0 0 0 4px rgba(var(--pto-primary-color), 0.15);
-            border-color: rgba(var(--pto-primary-color), 0.8);
+            box-shadow: 0 0 0 4px rgba(var(--pro-primary-color), 0.15);
+            border-color: rgba(var(--pro-primary-color), 0.8);
           }
 
           .pro-slider-rail {
@@ -229,7 +229,7 @@
           .pro-slider-track {
             position: absolute;
             height: 100%;
-            background: rgba(var(--pto-primary-color), 0.8);
+            background: rgba(var(--pro-primary-color), 0.8);
             border-radius: 3px;
             left: 0;
             top: 0;
@@ -242,7 +242,7 @@
             width: $handle-width;
             height: $handle-width;
             background: #fff;
-            border: 2px solid rgba(var(--pto-primary-color), 0.8);
+            border: 2px solid rgba(var(--pro-primary-color), 0.8);
             border-radius: 50%;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
             cursor: pointer;

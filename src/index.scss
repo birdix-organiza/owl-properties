@@ -1,5 +1,5 @@
 :root {
-  --pto-primary-color: 113, 99, 158;
+  --pro-primary-color: 113, 99, 158;
 }
 
 .pro-properties-panel {
@@ -46,14 +46,14 @@
 
     &:hover {
       cursor: pointer;
-      color: rgb(var(--pto-primary-color));
+      color: rgb(var(--pro-primary-color));
     }
 
     &.active {
       font-weight: 500;
       border-radius: $borderRadius;
       background-color: white;
-      color: rgb(var(--pto-primary-color));
+      color: rgb(var(--pro-primary-color));
     }
 
     &-content {
