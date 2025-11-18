@@ -68,7 +68,7 @@ export class BaseRenderer extends Component<
     this.env.bus.trigger(this.props.key, value);
   }
 
-  onChange(value: any, options: any) {
+  onChange(value: any, options?: any) {
     if (this.props.readonly) return;
 
     if (this.props.required) {
