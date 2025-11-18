@@ -6,7 +6,7 @@ export class Select extends BaseRenderer {
 <select
   class="select pro-property-renderer-content"
   t-att-class="props.className"
-  t-att-disabled="readonly"
+  t-att-disabled="props.readonly"
   t-model="state.value"
   t-on-change="onChangeSelect"
 >
@@ -34,7 +34,6 @@ export class Select extends BaseRenderer {
   onChangeSelect(ev: Event) {
     const val = (ev.target as HTMLSelectElement).value;
     this.state.value = val;
-    this.props.onChange?.(val);
-    this.fireChange(val);
+    this.onChange?.(val);
   }
 }

@@ -50,10 +50,6 @@ export class BaseRenderer extends Component<
     },
   };
 
-  get readonly() {
-    return this.props.readonly;
-  }
-
   state = useState({
     value: this.format(this.props.value),
   });
@@ -70,6 +66,19 @@ export class BaseRenderer extends Component<
   // notify in bus if need
   fireChange(value: any) {
     this.env.bus.trigger(this.props.key, value);
+  }
+
+  onChange(value: any, options: any) {
+    if (this.props.readonly) return;
+
+    if (this.props.required) {
+      if (!value) {
+        return;
+      }
+    }
+
+    this.props.onChange?.(value, options);
+    this.fireChange(value);
   }
 
   setup(): void {

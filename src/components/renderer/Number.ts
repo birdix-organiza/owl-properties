@@ -6,7 +6,7 @@ export class Number extends BaseRenderer {
 <input
     class="input"
     t-att-class="props.className"
-    t-att-disabled="readonly"
+    t-att-disabled="props.readonly"
     t-model="state.value"
     type="number"
     t-att-placeholder="props.placeholder"
@@ -44,7 +44,6 @@ export class Number extends BaseRenderer {
     (ev.target as HTMLInputElement).value = val.toString();
     const newValue = this.numberFormatter(val);
     this.state.value = newValue;
-    this.props.onChange?.(newValue);
-    this.fireChange(newValue);
+    this.onChange?.(newValue);
   }
 }
