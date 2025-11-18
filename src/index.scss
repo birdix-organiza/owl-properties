@@ -6,35 +6,77 @@
   height: 100%;
   width: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: #f6f6f6;
 
   * {
     user-select: none;
+    box-sizing: border-box;
   }
 
-  .pro-properties-tabs-container {
+  $borderRadius: 8px;
+
+  &-tabs {
+    flex-shrink: 0;
     width: 100%;
-    height: 30px;
-    padding-inline: 20px;
+    height: 35px;
+    padding-inline: 10px;
     box-sizing: border-box;
+    margin-top: 14px;
+    margin-bottom: 16px;
+    color: #8b8b8b;
 
     &-inner {
       width: 100%;
       height: 100%;
-      background-color: rebeccapurple;
       display: flex;
-    }
-
-    .pro-properties-tab {
-      flex: 1;
+      border-radius: $borderRadius;
+      background-color: #ebebeb;
+      padding: 2px;
     }
   }
 
-  // 空状态容器
-  .pro-properties-empty-wrapper {
+  &-tab {
+    flex: 1;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+
+    &:hover {
+      cursor: pointer;
+      color: rgb(var(--pto-primary-color));
+    }
+
+    &.active {
+      font-weight: 500;
+      border-radius: $borderRadius;
+      background-color: white;
+      color: rgb(var(--pto-primary-color));
+    }
+
+    &-content {
+      width: 100%;
+      padding: 14px;
+      height: 100%;
+      scrollbar-gutter: stable both-edges;
+
+      display: none;
+
+      &.active {
+        display: block;
+      }
+    }
+  }
+
+  &-content {
+    $contentRadius: 17px;
+
+    flex: 1;
+    overflow: hidden;
+    background-color: white;
+    border-top-left-radius: $contentRadius;
+    border-top-right-radius: $contentRadius;
+    border: 1px solid #e4e4e4;
   }
 }
