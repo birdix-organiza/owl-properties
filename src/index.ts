@@ -61,7 +61,7 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
   };
 
   state = useState({
-    activeTab: this.props.active || this.props.tabs[0].key,
+    activeTab: this.props.active || this.props.tabs[0]?.key,
   });
 
   get currentTab() {
@@ -120,7 +120,7 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
     </t>
     <t t-else="">
       <t t-set="tab" t-value="currentTab"/>
-      <div class="${classNames('&properties-panel-tab-content', 'active')}">
+      <div t-if="currentTab" class="${classNames('&properties-panel-tab-content', 'active')}">
         ${PropertiesPanel.componentTemplate}
       </div>
     </t>

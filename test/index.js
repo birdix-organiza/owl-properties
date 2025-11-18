@@ -23,7 +23,7 @@ class App extends Component {
   static template = xml`
 <div style="width: 100%; height: 100%;padding: 10px;box-sizing: border-box;">
   <div style="width: 300px; height: 100%;background-color: white;">
-    <PropertiesPanel ref="(r) => this.ref = r" tabs="state.tabs" active="state.active" onChangeTab.bind="onChangeTab" forceRender="false"/>
+    <PropertiesPanel />
   </div>
 </div>`;
 
@@ -38,7 +38,7 @@ class App extends Component {
           this.testValue = 'text2';
           this.state.tabs[0].properties[1].value = this.testValue;
           this.state.readonly = true;
-          this.ref.render(true);
+          this.ref?.render(true);
         }, 2000);
       },
       () => [],
