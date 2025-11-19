@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   background-color: #f6f6f6;
-  font-size: 14px;
+  font-size: 12px;
 
   * {
     user-select: none;
@@ -50,7 +50,7 @@
     }
 
     &.active {
-      font-weight: 500;
+      font-weight: 800;
       border-radius: $borderRadius;
       background-color: white;
       color: rgb(var(--pro-primary-color));
