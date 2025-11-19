@@ -66,7 +66,34 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
   });
 
   get currentTab() {
-    return this.props.tabs.find((tab) => tab.key === this.state.activeTab) || this.props.tabs[0];
+    // 首先尝试找到当前激活且可见的tab
+    const activeVisibleTab = this.props.tabs.find((tab) => tab.key === this.state.activeTab && this.isTabVisible(tab));
+
+    if (activeVisibleTab) {
+      return activeVisibleTab;
+    }
+
+    // 如果没有找到，则返回第一个可见的tab
+    return this.props.tabs.find((tab) => this.isTabVisible(tab));
+  }
+
+  isTabVisible(tab: TabItem) {
+    // 如果tab有自定义组件，则始终显示
+    if (tab.component) {
+      return true;
+    }
+
+    // 如果tab没有properties或properties为空数组，则不显示
+    if (!tab.properties || tab.properties.length === 0) {
+      return false;
+    }
+
+    // 如果所有属性都是invisible，则不显示该tab
+    return !tab.properties.every((property) => property.invisible?.());
+  }
+
+  get visibleTabs() {
+    return this.props.tabs.filter((tab) => this.isTabVisible(tab));
   }
 
   switchTab(key: string) {
@@ -99,7 +126,7 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
 <div class="${classNames('&properties-panel')}">
   <div class="${classNames('&properties-panel-tabs')}">
     <div class="${classNames('&properties-panel-tabs-inner')}">
-      <t t-foreach="props.tabs" t-as="tab" t-key="tab.key">
+      <t t-foreach="visibleTabs" t-as="tab" t-key="tab.key">
         <div
           class="${classNames('&properties-panel-tab')}"
           t-att-class="{'active': this.state.activeTab === tab.key}"
@@ -113,7 +140,7 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
   
   <div class="${classNames('&properties-panel-content')}">
     <t t-if="props.forceRender">
-      <div t-foreach="props.tabs" t-as="tab" t-key="tab.key" 
+      <div t-foreach="visibleTabs" t-as="tab" t-key="tab.key"
         class="${classNames('&properties-panel-tab-content')}"
         t-att-class="{ active: state.activeTab === tab.key }">
         ${PropertiesPanel.componentTemplate}
