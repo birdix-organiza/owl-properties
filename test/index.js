@@ -37,8 +37,8 @@ class App extends Component {
         setTimeout(() => {
           this.testValue = 'text2';
           this.state.tabs[0].properties[1].value = this.testValue;
-          this.state.readonly = true;
-          this.ref?.render(true);
+          // this.state.readonly = true;
+          // this.ref?.render(true);
         }, 2000);
       },
       () => [],
@@ -57,9 +57,9 @@ class App extends Component {
               key: 'group1',
               type: 'input',
               required: () => true,
-              // readonly: () => {
-              //   return this.state.readonly;
-              // },
+              readonly: () => {
+                return true;
+              },
             },
             {
               label: '样式',
@@ -98,9 +98,9 @@ class App extends Component {
               key: 'group6',
               type: 'slider',
               extra: {
-                max: 5,
-                step: 0.1,
-                decimals: 1,
+                max: 15,
+                step: 5,
+                decimals: 0,
               },
               onChange: (value, options) => {
                 console.log(value, options);
