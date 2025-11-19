@@ -15,7 +15,7 @@ import './index.scss';
 interface PropertiesPanelProps {
   tabs: TabItem[];
   active: string;
-  onChangeTab: (key: string) => void;
+  onChangeTab?: (key: string) => void;
   forceRender?: boolean;
   ref?: (ref: PropertiesPanel) => void;
   bus?: EventBus;
@@ -98,7 +98,7 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
 
   switchTab(key: string) {
     this.state.activeTab = key;
-    this.props.onChangeTab(key);
+    this.props.onChangeTab?.(key);
   }
 
   setup() {
