@@ -109,6 +109,15 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
       () => [],
     );
 
+    useEffect(
+      () => {
+        if (this.props.active) {
+          this.state.activeTab = this.props.active;
+        }
+      },
+      () => [this.props.active],
+    );
+
     useSubEnv({
       registry,
       bus: this.props.bus,
