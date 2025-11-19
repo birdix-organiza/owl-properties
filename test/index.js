@@ -57,9 +57,9 @@ class App extends Component {
               key: 'group1',
               type: 'input',
               required: () => true,
-              readonly: () => {
-                return this.state.readonly;
-              },
+              // readonly: () => {
+              //   return this.state.readonly;
+              // },
             },
             {
               label: '样式',
