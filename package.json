@@ -1,6 +1,6 @@
 {
   "name": "owl-properties",
-  "version": "3.0.9",
+  "version": "3.0.10",
   "description": "properties kanban uesd in odoo owl2",
   "main": "es/index.js",
   "scripts": {
@@ -23,6 +23,7 @@
   "author": "birdix",
   "license": "MIT",
   "dependencies": {
+    "@simonwep/pickr": "^1.9.1",
     "classnames": "^2.3.2"
   },
   "peerDependencies": {

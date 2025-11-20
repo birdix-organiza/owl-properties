@@ -91,12 +91,12 @@ class App extends Component {
             {
               label: '布尔选择器',
               key: 'group5',
-              type: 'switch',
+              type: 'color',
             },
             {
               label: '滑块选择器',
               key: 'group6',
-              type: 'slider',
+              type: 'color',
               extra: {
                 max: 15,
                 step: 5,

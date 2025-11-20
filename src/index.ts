@@ -1,15 +1,16 @@
-import { Component, xml, useState, useEffect, useSubEnv, EventBus, onRendered, reactive } from '@odoo/owl';
-import { classNames } from './utils/classNames';
+import { Component, EventBus, useEffect, useState, useSubEnv, xml } from '@odoo/owl';
+import { PropertiesWrapper } from './components/properties/PropertiesWrapper';
 import { BaseRenderer } from './components/renderer/BaseRenderer';
 import { Input } from './components/renderer/Input';
 import { Number } from './components/renderer/Number';
 import { Select } from './components/renderer/Select';
-import { Text } from './components/renderer/Text';
-import { Switch } from './components/renderer/Switch';
 import { Slider } from './components/renderer/Slider';
-import { PropertiesWrapper } from './components/properties/PropertiesWrapper';
+import { Switch } from './components/renderer/Switch';
+import { Text } from './components/renderer/Text';
 import type { PropertyItem, TabItem } from './type';
+import { classNames } from './utils/classNames';
 
+import { Color } from './components/renderer/Color';
 import './index.scss';
 
 interface PropertiesPanelProps {
@@ -172,6 +173,7 @@ registry.set('number', Number);
 registry.set('select', Select);
 registry.set('switch', Switch);
 registry.set('slider', Slider);
+registry.set('color', Color);
 
-export { BaseRenderer, PropertiesPanel, registry };
+export { BaseRenderer, PropertiesPanel, registry, Input, Number, Select, Switch, Slider, Text, Color };
 export type { PropertyItem, TabItem };
