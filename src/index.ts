@@ -111,7 +111,7 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
       () => {
         if (this.props.active) {
           if (this.state.visibleTabs.some((tab) => tab.key === this.props.active)) {
-            this.switchTab(this.props.active);
+            this.state.activeTab = this.props.active;
           } else {
             this.switchTab(this.state.visibleTabs[0]?.key);
           }
