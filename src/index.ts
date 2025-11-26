@@ -64,6 +64,7 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
 
   state = useState({
     activeTab: this.props.active || this.props.tabs[0]?.key,
+    visibleTabs: [],
   });
 
   get currentTab() {
@@ -93,10 +94,6 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
     return !tab.properties.every((property) => property.invisible?.());
   }
 
-  get visibleTabs() {
-    return this.props.tabs.filter((tab) => this.isTabVisible(tab));
-  }
-
   switchTab(key: string) {
     this.state.activeTab = key;
     this.props.onChangeTab?.(key);
@@ -113,10 +110,21 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
     useEffect(
       () => {
         if (this.props.active) {
-          this.state.activeTab = this.props.active;
+          if (this.state.visibleTabs.some((tab) => tab.key === this.props.active)) {
+            this.switchTab(this.props.active);
+          } else {
+            this.switchTab(this.state.visibleTabs[0]?.key);
+          }
         }
       },
-      () => [this.props.active],
+      () => [this.props.active, this.state.visibleTabs],
+    );
+
+    useEffect(
+      () => {
+        this.state.visibleTabs = this.props.tabs.filter((tab) => this.isTabVisible(tab));
+      },
+      () => [this.props.tabs],
     );
 
     useSubEnv({
@@ -136,7 +144,7 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
 <div class="${classNames('&properties-panel')}">
   <div class="${classNames('&properties-panel-tabs')}">
     <div class="${classNames('&properties-panel-tabs-inner')}">
-      <t t-foreach="visibleTabs" t-as="tab" t-key="tab.key">
+      <t t-foreach="state.visibleTabs" t-as="tab" t-key="tab.key">
         <div
           class="${classNames('&properties-panel-tab')}"
           t-att-class="{'active': this.state.activeTab === tab.key}"
@@ -150,7 +158,7 @@ class PropertiesPanel extends Component<PropertiesPanelProps> {
   
   <div class="${classNames('&properties-panel-content')}">
     <t t-if="props.forceRender">
-      <div t-foreach="visibleTabs" t-as="tab" t-key="tab.key"
+      <div t-foreach="state.visibleTabs" t-as="tab" t-key="tab.key"
         class="${classNames('&properties-panel-tab-content')}"
         t-att-class="{ active: state.activeTab === tab.key }">
         ${PropertiesPanel.componentTemplate}
