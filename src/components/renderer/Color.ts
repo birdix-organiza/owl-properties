@@ -127,6 +127,10 @@ export class Color extends BaseRenderer {
             const colors = this.getColor(instance);
             this.props.extra?.onPreview?.(colors.current);
           });
+
+        return () => {
+          this.pickr?.destroyAndRemove();
+        };
       },
       () => [],
     );
