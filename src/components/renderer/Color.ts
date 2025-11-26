@@ -115,7 +115,7 @@ export class Color extends BaseRenderer {
         this.pickr
           .on('hide', (instance) => {
             const colors = this.getColor(instance);
-            this.pickr?.setColor(colors.previous);
+            this.pickr?.setColor(colors.previous, true);
           })
           .on('change', (color, source, instance) => {
             this.props.extra?.onPreview?.(color.toHEXA().toString());
