@@ -36,10 +36,11 @@ export class Color extends BaseRenderer {
   }
 
   get pickrComponents() {
+    const { extra } = this.props;
     return {
       // Main components
       preview: true,
-      opacity: true,
+      opacity: extra?.opacity ?? true,
       hue: true,
 
       // Input / output Options
