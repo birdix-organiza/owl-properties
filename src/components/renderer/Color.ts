@@ -122,7 +122,8 @@ export class Color extends BaseRenderer {
             this.props.extra?.onPreview?.(color.toHEXA().toString());
           })
           .on('save', (color, instance) => {
-            this.onChange(color.toHEXA().toString());
+            const colors = this.getColor(instance);
+            this.onChange(colors);
           })
           .on('cancel', (instance) => {
             const colors = this.getColor(instance);
