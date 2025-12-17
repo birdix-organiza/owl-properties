@@ -30,6 +30,11 @@ export class Slider extends BaseRenderer {
     </div>
   `;
 
+  state = useState({
+    value: this.format(this.props.value),
+    previousValue: this.format(this.props.value),
+  });
+
   trackRef = useRef<HTMLElement>('track');
 
   get decimals() {
@@ -107,7 +112,10 @@ export class Slider extends BaseRenderer {
 
   onMouseUp = () => {
     this.sliderState.dragging = false;
-    this.props.onChange?.(this.state.value);
+    this.props.onChange?.(this.state.value, {
+      preveiousValue: this.state.previousValue,
+    });
+    this.state.previousValue = this.state.value;
     document.removeEventListener('mousemove', this.onMouseMove);
     document.removeEventListener('mouseup', this.onMouseUp);
   };
@@ -165,7 +173,10 @@ export class Slider extends BaseRenderer {
     if (ev.key === 'ArrowLeft' || ev.key === 'ArrowRight') {
       this.clearKeyInterval();
       this.keyDirection = null;
-      this.props.onChange?.(this.state.value);
+      this.props.onChange?.(this.state.value, {
+        preveiousValue: this.state.previousValue,
+      });
+      this.state.previousValue = this.state.value;
     }
   };
 
