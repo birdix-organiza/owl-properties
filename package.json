@@ -23,8 +23,9 @@
   "author": "birdix",
   "license": "MIT",
   "dependencies": {
-    "@simonwep/pickr": "^1.9.1",
-    "classnames": "^2.3.2"
+    "@simonwep/pickr": "1.9.1",
+    "classnames": "2.3.2",
+    "owl-tiptap": "1.0.2"
   },
   "peerDependencies": {
     "@odoo/owl": "^2.4.1"

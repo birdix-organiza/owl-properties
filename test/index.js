@@ -94,14 +94,9 @@ class App extends Component {
               type: 'color',
             },
             {
-              label: '滑块选择器',
+              label: '标签输入框',
               key: 'group6',
-              type: 'color',
-              extra: {
-                max: 15,
-                step: 5,
-                decimals: 0,
-              },
+              type: 'tagInput',
               onChange: (value, options) => {
                 console.log(value, options);
               },

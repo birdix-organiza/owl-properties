@@ -12,6 +12,7 @@ import { classNames } from './utils/classNames';
 
 import { Color } from './components/renderer/Color';
 import './index.scss';
+import { TagInput } from './components/renderer/TagInput';
 
 interface PropertiesPanelProps {
   tabs: TabItem[];
@@ -182,6 +183,7 @@ registry.set('select', Select);
 registry.set('switch', Switch);
 registry.set('slider', Slider);
 registry.set('color', Color);
+registry.set('tagInput', TagInput);
 
 export { BaseRenderer, PropertiesPanel, registry, Input, Number, Select, Switch, Slider, Text, Color };
 export type { PropertyItem, TabItem };
