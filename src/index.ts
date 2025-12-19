@@ -185,5 +185,5 @@ registry.set('slider', Slider);
 registry.set('color', Color);
 registry.set('tagInput', TagInput);
 
-export { BaseRenderer, PropertiesPanel, registry, Input, Number, Select, Switch, Slider, Text, Color };
+export { BaseRenderer, PropertiesPanel, registry, Input, Number, Select, Switch, Slider, Text, Color, TagInput };
 export type { PropertyItem, TabItem };
