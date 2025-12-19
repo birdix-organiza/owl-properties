@@ -3806,10 +3806,10 @@ orderedmap@^2.0.0:
   resolved "https://registry.npmjs.org/orderedmap/-/orderedmap-2.1.1.tgz"
   integrity sha512-TvAWxi0nDe1j/rtMcWcIj94+Ffe6n7zhow33h40SKxmsmozs6dz/e+EajymfoFcHd7sxNn8yHM8839uixMOV6g==
 
-owl-tiptap@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/owl-tiptap/-/owl-tiptap-1.0.2.tgz"
-  integrity sha512-X1g5Tw+Bw1kGLeCLD13WzAsmOKCf80o7NfZQfEF21s55dYC8zd4BpoWzniXHpdhwfwBKEw57W9ggmFw7qK6xjA==
+owl-tiptap@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/owl-tiptap/-/owl-tiptap-1.1.0.tgz"
+  integrity sha512-6O9TPBiY5sMx3GIgFQKEiR1jy2YOA9YLIg8Wyw1BAnn+Tv2D1rhxVImBB9ABEhsbKTbk5Dw9QylaQ4oTP2zD/g==
   dependencies:
     "@tiptap/core" "^3.2.0"
     "@tiptap/extension-document" "^3.13.0"

@@ -1,6 +1,6 @@
 {
   "name": "owl-properties",
-  "version": "3.4.1",
+  "version": "3.5.0",
   "description": "properties kanban uesd in odoo owl2",
   "main": "es/index.js",
   "scripts": {
@@ -25,7 +25,7 @@
   "dependencies": {
     "@simonwep/pickr": "1.9.1",
     "classnames": "2.3.2",
-    "owl-tiptap": "1.0.2"
+    "owl-tiptap": "1.1.0"
   },
   "peerDependencies": {
     "@odoo/owl": "^2.4.1"
