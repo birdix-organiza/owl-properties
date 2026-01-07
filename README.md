@@ -9,6 +9,9 @@ owl-properties 是一个基于 Odoo OWL 2 框架设计的属性面板组件库�
 ## 安装
 
 ```bash
+# 使用pnpm
+pnpm add owl-properties
+
 # 使用npm
 npm install owl-properties
 
@@ -104,16 +107,16 @@ class MyComponent extends Component {
 
 ```bash
 # 安装依赖
-yarn install
+pnpm install
 
 # 启动开发服务
-yarn start
+pnpm start
 
 # 构建
-yarn build
+pnpm build
 
 # 代码检查
-yarn eslint
+pnpm eslint
 ```
 
 ## 许可证
